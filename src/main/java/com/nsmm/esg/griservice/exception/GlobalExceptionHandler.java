@@ -37,6 +37,4 @@ public class GlobalExceptionHandler {
         );
         return ResponseEntity.status(ex.getStatus()).body(error);
     }
-
-    // 필요하면 여기서 다른 Exception도 추가 가능
 }

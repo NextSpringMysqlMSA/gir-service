@@ -8,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-import com.nsmm.esg.griservice.dto.ErrorResponse;
-import com.nsmm.esg.griservice.exception.DuplicateGriDisclosureException;
 
 import java.util.List;
 
