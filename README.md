@@ -49,14 +49,8 @@ flowchart TD
     classDef terminal fill:#d0f0c0,stroke:#1b5e20,color:#1b5e20;
     classDef error fill:#fdecea,stroke:#c62828,color:#c62828;
 
-%% 클래스 적용
+%% 클래스 적용 (한 줄로 유지)
     class Start,End1,End2,End3,End4,End5,End6,EndErr terminal;
-    class Auth,AuthCheck,Route,
-          GriAll,GriAllSvc,GriAllResp,
-          GriOne,GriOneSvc,GriOneResp,
-          GriCreate,GriCreateSvc,GriCreateResp,
-          GriUpdate,UpdateSvc,GriUpdateResp,
-          GriDelete,DeleteSvc,GriDeleteResp,
-          GriProgress,ProgressSvc,GriProgressResp forest;
+    class Auth,AuthCheck,Route,GriAll,GriAllSvc,GriAllResp,GriOne,GriOneSvc,GriOneResp,GriCreate,GriCreateSvc,GriCreateResp,GriUpdate,UpdateSvc,GriUpdateResp,GriDelete,DeleteSvc,GriDeleteResp,GriProgress,ProgressSvc,GriProgressResp forest;
     class Error401 error;
 ```
