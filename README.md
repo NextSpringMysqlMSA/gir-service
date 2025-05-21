@@ -1,40 +1,46 @@
 ```mermaid
 flowchart TD
-    start((Start))
+
+%% 공통 인증 처리
+    Start((Start))
+    Start --> Auth["X-MEMBER-ID 인증"]
+    Auth --> AuthCheck{"인증 성공 여부"}
+    AuthCheck -- "아니오" --> Error401["401 Unauthorized"] --> EndErr((End))
+    AuthCheck -- "예" --> Route["요청 분기"]
 
 %% GRI 전체 조회
-    start --> griGetAll[/GRI 전체 조회: GET /api/v1/gri/ 요청/]
-    griGetAll --> griGetAllSvc["Service: getAll()"]
-    griGetAllSvc --> griGetAllResp["전체 GRI 항목 반환"]
-    griGetAllResp --> end1((End))
+    Route --> GriAll["GRI 전체 조회 요청"]
+    GriAll --> GriAllSvc["griDisclosureService.getAll()"]
+    GriAllSvc --> GriAllResp["전체 목록 반환"]
+    GriAllResp --> End1((End))
 
 %% GRI 단건 조회
-    start --> griGetOne[/GRI 단건 조회: GET /api/v1/gri/griCode 요청/]
-    griGetOne --> griGetOneSvc["Service: getByCode()"]
-    griGetOneSvc --> griGetOneResp["GRI 항목 반환"]
-    griGetOneResp --> end2((End))
+    Route --> GriOne["GRI 단건 조회 요청"]
+    GriOne --> GriOneSvc["griDisclosureService.getByCode()"]
+    GriOneSvc --> GriOneResp["단건 항목 반환"]
+    GriOneResp --> End2((End))
 
-%% GRI 등록
-    start --> griPost[/GRI 등록: POST /api/v1/gri/ 요청/]
-    griPost --> griPostSvc["Service: create()"]
-    griPostSvc --> griPostResp["등록된 GRI 반환"]
-    griPostResp --> end3((End))
+%% GRI 항목 등록
+    Route --> GriCreate["GRI 항목 등록 요청"]
+    GriCreate --> GriCreateSvc["griDisclosureService.create()"]
+    GriCreateSvc --> GriCreateResp["등록 완료"]
+    GriCreateResp --> End3((End))
 
-%% GRI 수정
-    start --> griPut[/GRI 수정: PUT /api/v1/gri/id 요청/]
-    griPut --> griPutSvc["Service: update()"]
-    griPutSvc --> griPutResp["수정된 GRI 반환"]
-    griPutResp --> end4((End))
+%% GRI 항목 수정
+    Route --> GriUpdate["GRI 항목 수정 요청"]
+    GriUpdate --> UpdateSvc["소유자 확인 후 수정"]
+    UpdateSvc --> GriUpdateResp["수정 완료"]
+    GriUpdateResp --> End4((End))
 
-%% GRI 삭제
-    start --> griDelete[/GRI 삭제: DELETE /api/v1/gri/id 요청/]
-    griDelete --> griDeleteSvc["Service: delete()"]
-    griDeleteSvc --> griDeleteResp["삭제 완료 메시지"]
-    griDeleteResp --> end5((End))
+%% GRI 항목 삭제
+    Route --> GriDelete["GRI 항목 삭제 요청"]
+    GriDelete --> DeleteSvc["소유자 확인 후 삭제"]
+    DeleteSvc --> GriDeleteResp["삭제 완료"]
+    GriDeleteResp --> End5((End))
 
-%% GRI 진행도 조회
-    start --> griProgress[/GRI 진행도 조회: GET /api/v1/internal/gri/progress 요청/]
-    griProgress --> griProgressSvc["Service: getProgress()"]
-    griProgressSvc --> griProgressResp["진행도 반환"]
-    griProgressResp --> end6((End))
+%% GRI 진행률 조회
+    Route --> GriProgress["GRI 진행률 조회 요청"]
+    GriProgress --> ProgressSvc["진행률 계산 로직"]
+    ProgressSvc --> GriProgressResp["진행률 반환"]
+    GriProgressResp --> End6((End))
 ```
