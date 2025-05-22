@@ -1,3 +1,4 @@
+
 # 📘 GRI 공시 항목 관리 서비스
 
 GRI(Global Reporting Initiative) 기준에 따라 기업의 지속가능 경영 데이터를 항목별로 등록, 수정, 분석할 수 있는 서비스입니다.  
@@ -26,6 +27,7 @@ ESG 공시 대응을 위한 핵심 기능 중 하나로, 사용자가 입력한 
 ---
 
 ## 🔄 서비스 흐름도
+
 ```mermaid
 flowchart TD
 
@@ -77,8 +79,36 @@ flowchart TD
     classDef terminal fill:#d0f0c0,stroke:#1b5e20,color:#1b5e20;
     classDef error fill:#fdecea,stroke:#c62828,color:#c62828;
 
-%% 클래스 적용 (한 줄로 유지)
+%% 클래스 적용
     class Start,End1,End2,End3,End4,End5,End6,EndErr terminal;
     class Auth,AuthCheck,Route,GriAll,GriAllSvc,GriAllResp,GriOne,GriOneSvc,GriOneResp,GriCreate,GriCreateSvc,GriCreateResp,GriUpdate,UpdateSvc,GriUpdateResp,GriDelete,DeleteSvc,GriDeleteResp,GriProgress,ProgressSvc,GriProgressResp forest;
     class Error401 error;
-```
+````
+
+---
+
+## 🛠️ 기술 스택
+
+* **Spring Boot + REST API**
+* 인증 기반 요청 처리 (`X-MEMBER-ID` 헤더)
+* GRI 항목 코드 기반 CRUD
+* GRI 진행률 계산 로직 내장
+* 추후 확장: 공시 템플릿 기반 자동 입력 추천
+
+---
+
+## ✍️ 개발 기여
+
+* ESG 항목 중 `GRI 시리즈(2~400)` 전체 입력 구조 설계
+* 프론트엔드 상태관리 구조(Zustand)와 연동된 비동기 API 설계
+* 입력/수정/진행률 계산까지 단일 서비스 흐름으로 통합 구현
+
+---
+
+## 📈 확장 계획
+
+* 항목별 공시 템플릿 자동 생성 기능
+* GRI 진행률 → ESG 점수화 로직 연동
+* 공시 항목 이력 관리 및 검토 단계 분리
+
+
